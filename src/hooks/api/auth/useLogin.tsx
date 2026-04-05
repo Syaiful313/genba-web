@@ -17,9 +17,13 @@ const useLogin = () => {
       return data;
     },
     onSuccess: async (data) => {
-      await signIn("credentials", { ...data, redirect: false });
+      await signIn("credentials", {
+        user: JSON.stringify(data.user),
+        token: data.token,
+        redirect: false,
+      });
       toast.success("Login successfully");
-      // router.push("/dashboard");
+      router.push("/dashboard");
     },
     onError: (error: AxiosError<any>) => {
       toast.error(error.response?.data.message || "Login failed");

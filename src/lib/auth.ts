@@ -10,8 +10,17 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        if (credentials) {
-          return credentials as any;
+        const payload = credentials as Record<string, string> | undefined;
+        if (payload?.user && payload?.token) {
+          const user = JSON.parse(payload.user);
+          return {
+            id: user.id || user.nik,
+            nik: user.nik,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            position: user.position,
+            accessToken: payload.token,
+          };
         }
         return null;
       },
@@ -20,12 +29,14 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        return { ...token, ...user };
+        token.user = user;
       }
       return token;
     },
-    async session({ session, token }) {
-      session.user = token as any;
+    async session({ session, token }: any) {
+      if (token.user) {
+        session.user = token.user;
+      }
       return session;
     },
   },

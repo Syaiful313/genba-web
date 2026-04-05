@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import AuthProvider from "@/providers/AuthProvider";
 import TokenProvider from "@/providers/TokenProvider";
 import QueryProvider from "@/providers/QueryProvider";
@@ -34,7 +35,9 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <QueryProvider>
           <AuthProvider>
-            <TokenProvider>{children}</TokenProvider>
+            <TokenProvider>
+              <TooltipProvider>{children}</TooltipProvider>
+            </TokenProvider>
           </AuthProvider>
         </QueryProvider>
         <Toaster position="top-right" duration={2000} />
