@@ -47,7 +47,8 @@ export function CreateWorkspaceModal({ open, onOpenChange }: CreateWorkspaceModa
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md" showCloseButton={false}>
+
         <DialogHeader>
           <DialogTitle>Buat Workspace Baru</DialogTitle>
           <DialogDescription>
