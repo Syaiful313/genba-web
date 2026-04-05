@@ -10,10 +10,12 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { ClipboardCheck, Eye, EyeOff, Loader2 } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { useFormik } from "formik";
 import { loginSchema } from "./schemas";
 import useLogin from "@/hooks/api/auth/useLogin";
+import Image from "next/image";
+
 
 export function LoginForm({
   className,
@@ -38,8 +40,15 @@ export function LoginForm({
       <form onSubmit={formik.handleSubmit}>
         <FieldGroup>
           <div className="flex flex-col items-center gap-2 text-center mb-4">
-            <div className="flex size-10 items-center justify-center rounded-xl bg-primary shadow-lg shadow-primary/20 mb-2">
-              <ClipboardCheck className="size-6 text-primary-foreground" />
+            <div className="relative flex size-10 items-center justify-center overflow-hidden rounded-xl mb-2">
+              <Image
+                src="/logo.png"
+                alt="Genba Logo"
+                fill
+                sizes="40px"
+                className="object-contain"
+                priority
+              />
             </div>
             <h1 className="text-2xl font-bold tracking-tight">
               Masuk ke Sistem Genba

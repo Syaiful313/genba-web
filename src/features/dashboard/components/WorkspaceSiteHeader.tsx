@@ -1,14 +1,6 @@
 "use client";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -18,9 +10,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Separator } from "@/components/ui/separator";
-import { CommandIcon, LogOutIcon, UserIcon } from "lucide-react";
+import { LogOutIcon, UserIcon } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
 
 interface WorkspaceSiteHeaderProps {
   workspaceTitle?: string;
@@ -42,31 +35,21 @@ export function WorkspaceSiteHeader({
       <div className="flex h-16 items-center justify-between px-4 lg:px-8 max-w-[1600px] mx-auto w-full">
         {/* Sisi Kiri: Branding & Breadcrumb */}
         <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
-            <CommandIcon className="size-5" />
-            <span className="text-xl font-semibold">Genba</span>
-          </div>
-
-          <Separator
-            orientation="vertical"
-            className="h-4 hidden sm:block mx-1"
-          />
-
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink href="/dashboard" className="text-base">
-                  Dashboard
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator className="hidden md:block" />
-              <BreadcrumbItem>
-                <BreadcrumbPage className="text-base font-medium text-primary truncate max-w-[150px] sm:max-w-[200px] md:max-w-none">
-                  {workspaceTitle || "Detail Workspace"}
-                </BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
+          <Link
+            href="/dashboard"
+            className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+          >
+            <div className="relative size-6">
+              <Image
+                src="/logo.png"
+                alt="Genba Logo"
+                fill
+                sizes="24px"
+                className="object-contain"
+              />
+            </div>
+            <span className="text-xl font-bold tracking-tight">Genba</span>
+          </Link>
         </div>
 
         {/* Sisi Kanan: User Profile Logout */}

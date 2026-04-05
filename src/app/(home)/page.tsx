@@ -13,6 +13,7 @@ import {
   Zap,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -25,8 +26,15 @@ export default function Home() {
       <nav className="fixed top-0 z-50 w-full border-b border-slate-200/50 bg-white/70 backdrop-blur-xl dark:border-slate-800/50 dark:bg-slate-950/70">
         <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:h-20 sm:px-6 lg:px-12">
           <div className="flex items-center gap-2 sm:gap-2.5">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary shadow-lg shadow-primary/25 sm:h-10 sm:w-10 sm:rounded-xl">
-              <ClipboardCheck className="h-5 w-5 text-primary-foreground sm:h-6 sm:w-6" />
+            <div className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg sm:h-10 sm:w-10">
+              <Image
+                src="/logo.png"
+                alt="Genba Logo"
+                fill
+                sizes="(max-width: 768px) 32px, 40px"
+                className="object-contain"
+                priority
+              />
             </div>
             <span className="text-xl font-black tracking-tighter text-slate-900 dark:text-white sm:text-2xl">
               GENBA
@@ -40,7 +48,7 @@ export default function Home() {
             >
               Bantuan S.O.P
             </Button>
-            <Button 
+            <Button
               asChild
               className="rounded-full px-4 py-2 text-xs font-bold shadow-lg shadow-primary/20 sm:px-6 sm:text-sm md:text-base cursor-pointer"
             >
@@ -86,13 +94,6 @@ export default function Home() {
                   Mulai Inspeksi Area
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="h-14 w-full rounded-2xl px-8 text-base font-bold backdrop-blur-sm transition-all hover:bg-slate-50 sm:h-16 sm:w-auto sm:px-10 sm:text-lg dark:hover:bg-slate-900"
-              >
-                Panduan Penggunaan
               </Button>
             </div>
 
@@ -189,8 +190,14 @@ export default function Home() {
         <div className="container mx-auto px-6 text-center lg:px-12">
           <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
             <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-                <ClipboardCheck className="h-5 w-5 text-primary-foreground" />
+              <div className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg">
+                <Image
+                  src="/logo.png"
+                  alt="Genba Logo"
+                  fill
+                  sizes="32px"
+                  className="object-contain"
+                />
               </div>
               <span className="text-xl font-black text-slate-900 dark:text-white">
                 GENBA

@@ -11,8 +11,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
-import { CommandIcon, LogOutIcon, UserIcon } from "lucide-react";
+import { LogOutIcon, UserIcon } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
+
 
 export function SiteHeader() {
   const { data: session } = useSession();
@@ -27,10 +30,18 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-xs">
       <div className="flex h-16 items-center justify-between px-4 lg:px-8 max-w-[1600px] mx-auto w-full">
         <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
-            <CommandIcon className="size-5" />
-            <span className="text-xl font-semibold">Genba</span>
-          </div>
+          <Link href="/dashboard" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <div className="relative size-6">
+              <Image
+                src="/logo.png"
+                alt="Genba Logo"
+                fill
+                sizes="24px"
+                className="object-contain"
+              />
+            </div>
+            <span className="text-xl font-bold tracking-tight">Genba</span>
+          </Link>
         </div>
 
         <div className="flex items-center gap-4">
