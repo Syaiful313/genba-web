@@ -13,7 +13,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { CreateReportModal } from "@/features/dashboard/components/CreateReportModal";
-import { SiteHeader } from "@/features/dashboard/components/SiteHeader";
+import { WorkspaceSiteHeader } from "@/features/dashboard/components/WorkspaceSiteHeader";
 import useGetWorkspaceById from "@/hooks/api/workspace/useGetWorkspaceById";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
@@ -43,7 +43,7 @@ export default function WorkspaceDetail() {
     >
       <AppSidebar variant="inset" />
       <SidebarInset>
-        <SiteHeader />
+        <WorkspaceSiteHeader workspaceTitle={workspace?.title} />
         <div className="flex flex-1 flex-col">
           <div className="@container/main flex flex-1 flex-col gap-2">
             <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
@@ -59,36 +59,43 @@ export default function WorkspaceDetail() {
                         Gagal mengambil detail workspace atau data tidak
                         ditemukan.
                       </p>
-                      <Button variant="outline" onClick={() => router.back()}>
+                      <Button
+                        variant="outline"
+                        onClick={() => router.back()}
+                        className="cursor-pointer"
+                      >
                         Kembali
                       </Button>
                     </div>
                   ) : (
                     <>
-                      <div className="flex items-center justify-between gap-4">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <div className="flex items-center gap-4">
                           <Button
                             variant="outline"
                             size="icon"
                             onClick={() => router.back()}
+                            className="shrink-0 cursor-pointer"
                           >
                             <ArrowLeft className="h-4 w-4" />
                           </Button>
-                          <div>
-                            <h2 className="text-2xl font-bold tracking-tight">
+                          <div className="min-w-0">
+                            <h2 className="text-xl md:text-2xl font-bold tracking-tight break-words">
                               {workspace.title}
                             </h2>
-                            <p className="text-muted-foreground">
+                            <p className="text-sm md:text-base text-muted-foreground">
                               {workspace.description ||
                                 "Tidak ada deskripsi workspace."}
                             </p>
                           </div>
                         </div>
 
-                        <CreateReportModal
-                          workspaceId={id}
-                          onSuccess={() => refetch()}
-                        />
+                        <div className="w-full sm:w-auto overflow-hidden">
+                          <CreateReportModal
+                            workspaceId={id}
+                            onSuccess={() => refetch()}
+                          />
+                        </div>
                       </div>
 
                       <div className="flex flex-col gap-4 mt-4">
@@ -104,24 +111,24 @@ export default function WorkspaceDetail() {
                             <Table>
                               <TableHeader>
                                 <TableRow>
-                                  <TableHead className="w-[50px] text-center">
+                                  <TableHead className="w-[50px] text-center border-r last:border-r-0">
                                     No.
                                   </TableHead>
-                                  <TableHead>Foto</TableHead>
-                                  <TableHead>Judul</TableHead>
-                                  <TableHead>Deskripsi</TableHead>
-                                  <TableHead>Reporter</TableHead>
-                                  <TableHead>Status</TableHead>
-                                  <TableHead>Tanggal</TableHead>
+                                  <TableHead className="border-r last:border-r-0">Foto</TableHead>
+                                  <TableHead className="border-r last:border-r-0">Judul</TableHead>
+                                  <TableHead className="border-r last:border-r-0">Deskripsi</TableHead>
+                                  <TableHead className="border-r last:border-r-0">Reporter</TableHead>
+                                  <TableHead className="border-r last:border-r-0">Status</TableHead>
+                                  <TableHead className="last:border-r-0">Tanggal</TableHead>
                                 </TableRow>
                               </TableHeader>
                               <TableBody>
                                 {reports.map((report, index) => (
                                   <TableRow key={report.id}>
-                                    <TableCell className="text-center">
+                                    <TableCell className="text-center border-r last:border-r-0">
                                       {index + 1}
                                     </TableCell>
-                                    <TableCell>
+                                    <TableCell className="border-r last:border-r-0">
                                       {report.photoUrl ? (
                                         <div className="h-10 w-10 rounded-md overflow-hidden border">
                                           <img
@@ -136,20 +143,20 @@ export default function WorkspaceDetail() {
                                         </div>
                                       )}
                                     </TableCell>
-                                    <TableCell className="font-medium">
+                                    <TableCell className="font-medium border-r last:border-r-0">
                                       {report.title}
                                     </TableCell>
                                     <TableCell
-                                      className="text-muted-foreground max-w-[200px] truncate"
+                                      className="text-muted-foreground max-w-[200px] truncate border-r last:border-r-0"
                                       title={report.description || ""}
                                     >
                                       {report.description || "-"}
                                     </TableCell>
-                                    <TableCell>
+                                    <TableCell className="border-r last:border-r-0">
                                       {report.reporter?.firstName}{" "}
                                       {report.reporter?.lastName}
                                     </TableCell>
-                                    <TableCell>
+                                    <TableCell className="border-r last:border-r-0">
                                       <Badge
                                         variant={
                                           report.status === "CLOSED" ||
@@ -161,7 +168,7 @@ export default function WorkspaceDetail() {
                                         {report.status}
                                       </Badge>
                                     </TableCell>
-                                    <TableCell className="whitespace-nowrap">
+                                    <TableCell className="whitespace-nowrap last:border-r-0">
                                       {new Date(
                                         report.createdAt,
                                       ).toLocaleDateString("id-ID")}

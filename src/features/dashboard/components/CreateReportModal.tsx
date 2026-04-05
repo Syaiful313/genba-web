@@ -101,7 +101,7 @@ export function CreateReportModal({
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button>
+        <Button className="w-full sm:w-auto cursor-pointer">
           <Plus className="h-4 w-4 mr-2" />
           Tambah Laporan
         </Button>
@@ -167,7 +167,7 @@ export function CreateReportModal({
                     type="button"
                     variant="destructive"
                     size="icon"
-                    className="absolute top-2 right-2 rounded-full size-8 shadow-lg"
+                    className="absolute top-2 right-2 rounded-full size-8 shadow-lg cursor-pointer"
                     onClick={removeFile}
                     disabled={isCreating}
                   >
@@ -179,7 +179,7 @@ export function CreateReportModal({
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
                   disabled={isCreating}
-                  className="flex flex-col items-center justify-center w-full aspect-video rounded-lg border-2 border-dashed border-muted-foreground/25 hover:border-primary/50 hover:bg-primary/5 transition-colors group disabled:opacity-50"
+                  className="flex flex-col items-center justify-center w-full aspect-video rounded-lg border-2 border-dashed border-muted-foreground/25 hover:border-primary/50 hover:bg-primary/5 transition-colors group disabled:opacity-50 cursor-pointer"
                 >
                   <div className="flex flex-col items-center gap-2 text-muted-foreground group-hover:text-primary transition-colors">
                     <Camera className="size-8" />
@@ -201,10 +201,11 @@ export function CreateReportModal({
               variant="outline"
               onClick={() => setIsOpen(false)}
               disabled={isCreating}
+              className="cursor-pointer"
             >
               Batal
             </Button>
-            <Button type="submit" disabled={isCreating}>
+            <Button type="submit" disabled={isCreating} className="cursor-pointer">
               {isCreating ? (
                 <>
                   <Loader2 className="h-4 w-4 mr-2 animate-spin" />

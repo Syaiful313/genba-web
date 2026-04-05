@@ -35,7 +35,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { data: session, status } = useSession();
   const isLoading = status === "loading";
 
-  // Handle both flat and nested structure to be safe
   const rawUser = session?.user as any;
   const user = rawUser?.user || rawUser;
 
@@ -67,26 +66,30 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             {isLoading ? (
-              <SidebarMenuButton size="lg" disabled>
-                <Skeleton className="size-8 rounded-lg" />
-                <div className="flex flex-col gap-1.5 flex-1 overflow-hidden">
-                  <Skeleton className="h-3 w-3/4 rounded" />
-                  <Skeleton className="h-2 w-1/2 rounded" />
+              <SidebarMenuButton
+                size="lg"
+                disabled
+                className="flex items-center gap-3 py-3 h-auto"
+              >
+                <Skeleton className="size-10 rounded-lg" />
+                <div className="flex flex-col gap-2 flex-1 overflow-hidden">
+                  <Skeleton className="h-4 w-3/4 rounded" />
+                  <Skeleton className="h-3 w-1/2 rounded" />
                 </div>
               </SidebarMenuButton>
             ) : (
               <SidebarMenuButton
                 size="lg"
-                className="hover:bg-sidebar-accent/50 data-[state=open]:bg-sidebar-accent"
+                className="flex items-center gap-3 py-3 h-auto hover:bg-sidebar-accent/50 data-[state=open]:bg-sidebar-accent transition-all"
               >
-                <Avatar className="size-8 rounded-lg">
+                <Avatar className="size-10 rounded-lg">
                   <AvatarImage src="" alt={fullName} />
                   <AvatarFallback className="rounded-lg bg-primary/10 text-primary">
-                    <UserIcon className="size-4" />
+                    <UserIcon className="size-5" />
                   </AvatarFallback>
                 </Avatar>
-                <div className="grid flex-1 text-left text-sm leading-tight ml-1">
-                  <span className="truncate font-semibold text-sidebar-foreground">
+                <div className="flex flex-col items-start text-left leading-tight ml-1">
+                  <span className="truncate font-semibold text-base text-sidebar-foreground">
                     {fullName}
                   </span>
                   <span className="truncate text-xs text-muted-foreground uppercase tracking-tight">
@@ -99,11 +102,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
           <SidebarMenuItem>
             <SidebarMenuButton
+              size="lg"
               onClick={() => signOut({ callbackUrl: "/login" })}
-              className="text-red-500 hover:text-red-600 hover:bg-red-100/50 dark:hover:bg-red-950/50 transition-all mt-2 font-medium border border-transparent hover:border-red-200 dark:hover:border-red-900/50"
+              className="flex justify-center hover:cursor-pointer gap-2 transition-all mt-2 font-medium border border-sidebar-border shadow-sm rounded-xl hover:bg-sidebar-accent/50"
             >
-              <LogOutIcon className="size-4" />
-              <span>Logout Account</span>
+              <LogOutIcon className="size-5" />
+              <span className="text-base">Logout Account</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

@@ -66,14 +66,14 @@ export function WorkspaceList() {
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight">Workspaces</h2>
+          <h2 className="text-2xl font-bold tracking-tight">Daftar Workspace</h2>
           <p className="text-muted-foreground">
-            Manage your current workspaces and projects.
+            Kelola seluruh workspace dan proyek aktif Anda di sini.
           </p>
         </div>
-        <Button onClick={() => setIsModalOpen(true)}>
+        <Button onClick={() => setIsModalOpen(true)} className="cursor-pointer">
           <Plus className="mr-2 h-4 w-4" />
-          Create Workspace
+          Buat Workspace
         </Button>
       </div>
 
@@ -83,7 +83,7 @@ export function WorkspaceList() {
         </div>
       ) : isError ? (
         <div className="flex h-32 items-center justify-center text-red-500">
-          Failed to load workspaces. Please try again.
+          Gagal memuat daftar workspace. Silakan coba lagi nanti.
         </div>
       ) : workspaces.length === 0 ? (
         <div className="flex h-40 flex-col items-center justify-center rounded-lg border border-dashed text-muted-foreground gap-2 mt-4">
@@ -92,6 +92,7 @@ export function WorkspaceList() {
             variant="outline"
             size="sm"
             onClick={() => setIsModalOpen(true)}
+            className="cursor-pointer"
           >
             Buat Sekarang
           </Button>
@@ -102,10 +103,10 @@ export function WorkspaceList() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-[50px] text-center">No.</TableHead>
-                  <TableHead>Nama Workspace</TableHead>
-                  <TableHead>Deskripsi</TableHead>
-                  <TableHead>Role</TableHead>
+                  <TableHead className="w-[50px] text-center border-r last:border-r-0">No.</TableHead>
+                  <TableHead className="border-r last:border-r-0">Nama Workspace</TableHead>
+                  <TableHead className="border-r last:border-r-0">Deskripsi</TableHead>
+                  <TableHead className="border-r last:border-r-0">Role</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -117,16 +118,16 @@ export function WorkspaceList() {
                       className="cursor-pointer hover:bg-muted/50 transition-colors"
                       onClick={() => router.push(`/dashboard/${workspace.id}`)}
                     >
-                      <TableCell className="text-center">
+                      <TableCell className="text-center border-r last:border-r-0">
                         {itemNumber}
                       </TableCell>
-                      <TableCell className="font-medium">
+                      <TableCell className="font-medium border-r last:border-r-0">
                         {workspace.title}
                       </TableCell>
-                      <TableCell className="text-muted-foreground">
+                      <TableCell className="text-muted-foreground border-r last:border-r-0">
                         {workspace.description || "Tidak ada deskripsi"}
                       </TableCell>
-                      <TableCell>
+                      <TableCell className="last:border-r-0">
                         {workspace.role ? workspace.role : "Owner"}
                       </TableCell>
                     </TableRow>
@@ -141,7 +142,7 @@ export function WorkspaceList() {
               <PaginationItem>
                 <PaginationPrevious
                   href="#"
-                  className={page <= 1 ? "pointer-events-none opacity-50" : ""}
+                  className={`cursor-pointer ${page <= 1 ? "pointer-events-none opacity-50" : ""}`}
                   onClick={(e: React.MouseEvent) => {
                     e.preventDefault();
                     if (page > 1) setPage(page - 1);
@@ -154,7 +155,7 @@ export function WorkspaceList() {
               <PaginationItem>
                 <PaginationNext
                   href="#"
-                  className={page >= totalPages ? "pointer-events-none opacity-50" : ""}
+                  className={`cursor-pointer ${page >= totalPages ? "pointer-events-none opacity-50" : ""}`}
                   onClick={(e: React.MouseEvent) => {
                     e.preventDefault();
                     if (page < totalPages) setPage(page + 1);
