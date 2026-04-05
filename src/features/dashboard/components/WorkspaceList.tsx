@@ -64,17 +64,27 @@ export function WorkspaceList() {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-2xl font-bold tracking-tight">Daftar Workspace</h2>
-          <p className="text-muted-foreground">
-            Kelola seluruh workspace dan proyek aktif Anda di sini.
-          </p>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex items-center gap-4">
+          <div className="min-w-0">
+            <h2 className="text-xl md:text-2xl font-bold tracking-tight break-words text-foreground">
+              Daftar Workspace
+            </h2>
+            <p className="text-sm md:text-base text-muted-foreground">
+              Kelola seluruh workspace dan proyek aktif Anda di sini.
+            </p>
+          </div>
         </div>
-        <Button onClick={() => setIsModalOpen(true)} className="cursor-pointer">
-          <Plus className="mr-2 h-4 w-4" />
-          Buat Workspace
-        </Button>
+
+        <div className="w-full sm:w-auto overflow-hidden">
+          <Button
+            onClick={() => setIsModalOpen(true)}
+            className="cursor-pointer w-full sm:w-auto"
+          >
+            <Plus className="mr-2 h-4 w-4" />
+            Buat Workspace
+          </Button>
+        </div>
       </div>
 
       {isLoading ? (
@@ -103,17 +113,25 @@ export function WorkspaceList() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-[50px] text-center border-r last:border-r-0">No.</TableHead>
-                  <TableHead className="border-r last:border-r-0">Nama Workspace</TableHead>
-                  <TableHead className="border-r last:border-r-0">Deskripsi</TableHead>
-                  <TableHead className="border-r last:border-r-0">Role</TableHead>
+                  <TableHead className="w-[50px] text-center border-r last:border-r-0">
+                    No.
+                  </TableHead>
+                  <TableHead className="border-r last:border-r-0">
+                    Nama Workspace
+                  </TableHead>
+                  <TableHead className="border-r last:border-r-0">
+                    Deskripsi
+                  </TableHead>
+                  <TableHead className="border-r last:border-r-0">
+                    Role
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {workspaces.map((workspace, index) => {
                   const itemNumber = (page - 1) * limit + (index + 1);
                   return (
-                    <TableRow 
+                    <TableRow
                       key={workspace.id}
                       className="cursor-pointer hover:bg-muted/50 transition-colors"
                       onClick={() => router.push(`/dashboard/${workspace.id}`)}
