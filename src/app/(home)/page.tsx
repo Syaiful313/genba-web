@@ -40,8 +40,11 @@ export default function Home() {
             >
               Bantuan S.O.P
             </Button>
-            <Button className="rounded-full px-4 py-2 text-xs font-bold shadow-lg shadow-primary/20 sm:px-6 sm:text-sm md:text-base">
-              Masuk ke Sistem
+            <Button 
+              asChild
+              className="rounded-full px-4 py-2 text-xs font-bold shadow-lg shadow-primary/20 sm:px-6 sm:text-sm md:text-base cursor-pointer"
+            >
+              <Link href="/login">Masuk ke Sistem</Link>
             </Button>
           </div>
         </div>
@@ -75,11 +78,14 @@ export default function Home() {
 
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:mt-12 sm:flex-row">
               <Button
+                asChild
                 size="lg"
-                className="h-14 w-full rounded-2xl px-8 text-base font-bold shadow-2xl shadow-primary/30 transition-all hover:scale-105 active:scale-95 sm:h-16 sm:w-auto sm:px-10 sm:text-lg"
+                className="h-14 w-full rounded-2xl px-8 text-base font-bold shadow-2xl shadow-primary/30 transition-all hover:scale-105 active:scale-95 sm:h-16 sm:w-auto sm:px-10 sm:text-lg cursor-pointer"
               >
-                Mulai Inspeksi Area
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <Link href="/login">
+                  Mulai Inspeksi Area
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
               </Button>
               <Button
                 size="lg"
@@ -166,10 +172,11 @@ export default function Home() {
                 </p>
                 <div className="mt-12 flex justify-center">
                   <Button
+                    asChild
                     size="lg"
-                    className="h-16 rounded-2xl px-12 text-xl font-bold shadow-2xl shadow-primary/40 transition-transform hover:scale-105 active:scale-95"
+                    className="h-16 rounded-2xl px-12 text-xl font-bold shadow-2xl shadow-primary/40 transition-transform hover:scale-105 active:scale-95 cursor-pointer"
                   >
-                    Masuk ke Dashboard
+                    <Link href="/login">Masuk ke Dashboard</Link>
                   </Button>
                 </div>
               </div>
