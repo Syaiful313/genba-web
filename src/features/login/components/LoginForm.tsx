@@ -107,7 +107,7 @@ export function LoginForm({
               {isPending ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Memproses...
+                  Masuk...
                 </>
               ) : (
                 "Masuk Sekarang"
