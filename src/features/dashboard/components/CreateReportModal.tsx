@@ -31,6 +31,7 @@ const createReportSchema = Yup.object().shape({
   description: Yup.string().optional(),
   workspaceId: Yup.string().required(),
   photo: Yup.mixed().optional(),
+  pic: Yup.string().required("PIC wajib diisi"),
 });
 
 export function CreateReportModal({
@@ -49,6 +50,7 @@ export function CreateReportModal({
       description: "",
       workspaceId: workspaceId,
       photo: null as File | null,
+      pic: "",
     },
     validationSchema: createReportSchema,
     enableReinitialize: true,
@@ -59,6 +61,7 @@ export function CreateReportModal({
           description: values.description,
           workspaceId: values.workspaceId,
           photo: values.photo || undefined,
+          pic: values.pic,
         },
         {
           onSuccess: () => {
@@ -140,6 +143,21 @@ export function CreateReportModal({
               />
               {formik.touched.description && formik.errors.description && (
                 <FieldError>{formik.errors.description}</FieldError>
+              )}
+            </FieldContent>
+          </Field>
+
+          <Field>
+            <FieldLabel htmlFor="pic">PIC (Person In Charge)</FieldLabel>
+            <FieldContent>
+              <Input
+                id="pic"
+                placeholder="Nama penanggung jawab"
+                {...formik.getFieldProps("pic")}
+                disabled={isCreating}
+              />
+              {formik.touched.pic && formik.errors.pic && (
+                <FieldError>{formik.errors.pic}</FieldError>
               )}
             </FieldContent>
           </Field>

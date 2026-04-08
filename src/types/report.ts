@@ -1,15 +1,15 @@
-import { PaginationQueries } from "./pagination";
-import { Report } from "./workspace";
+import { Creator } from "./user";
 
-export interface GetReportsQueries extends PaginationQueries {
-  workspaceId?: string;
-  search?: string;
-  status?: string;
-}
-
-export interface CreateReportPayload {
-  title: string;
-  description?: string;
+export interface Report {
+  id: string;
   workspaceId: string;
-  photo?: File;
+  reporterId: string;
+  title: string;
+  description: string | null;
+  photoUrl: string | null;
+  pic: string;
+  deletedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+  reporter?: Creator;
 }

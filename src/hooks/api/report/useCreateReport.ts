@@ -1,9 +1,16 @@
 "use client";
 
 import useAxios from "@/hooks/useAxios";
-import { Report } from "@/types/workspace";
-import { CreateReportPayload } from "@/types/report";
+import { Report } from "@/types/report";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+export interface CreateReportPayload {
+  title: string;
+  description?: string;
+  workspaceId: string;
+  photo?: File;
+  pic: string;
+}
 
 const useCreateReport = () => {
   const { axiosInstance } = useAxios();
@@ -14,6 +21,7 @@ const useCreateReport = () => {
       const formData = new FormData();
       formData.append("title", payload.title);
       formData.append("workspaceId", payload.workspaceId);
+      formData.append("pic", payload.pic);
       
       if (payload.description) {
         formData.append("description", payload.description);

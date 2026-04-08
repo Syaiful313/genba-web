@@ -122,7 +122,7 @@ export default function WorkspaceDetail() {
                                   Reporter
                                 </TableHead>
                                 <TableHead className="border-r last:border-r-0">
-                                  Status
+                                  PIC
                                 </TableHead>
                                 <TableHead className="last:border-r-0">
                                   Tanggal
@@ -164,16 +164,7 @@ export default function WorkspaceDetail() {
                                     {report.reporter?.lastName}
                                   </TableCell>
                                   <TableCell className="border-r last:border-r-0">
-                                    <Badge
-                                      variant={
-                                        report.status === "CLOSED" ||
-                                        report.status === "FIXED"
-                                          ? "default"
-                                          : "secondary"
-                                      }
-                                    >
-                                      {report.status}
-                                    </Badge>
+                                    {report.pic}
                                   </TableCell>
                                   <TableCell className="whitespace-nowrap last:border-r-0">
                                     {new Date(

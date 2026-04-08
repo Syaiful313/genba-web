@@ -13,3 +13,9 @@ export interface User {
   createdAt: Date | string;
   updatedAt: Date | string;
 }
+
+export interface Creator {
+  firstName: string;
+  lastName: string;
+  position: string;
+}

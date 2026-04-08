@@ -1,9 +1,13 @@
 "use client";
 
 import useAxios from "@/hooks/useAxios";
-import { PageableResponse } from "@/types/pagination";
-import { Workspace, GetWorkspacesQueries } from "@/types/workspace";
+import { PageableResponse, PaginationQueries } from "@/types/pagination";
+import { Workspace } from "@/types/workspace";
 import { useQuery } from "@tanstack/react-query";
+
+export interface GetWorkspacesQueries extends PaginationQueries {
+  search?: string;
+}
 
 const useGetWorkspaces = (queries?: GetWorkspacesQueries) => {
   const { axiosInstance } = useAxios();
