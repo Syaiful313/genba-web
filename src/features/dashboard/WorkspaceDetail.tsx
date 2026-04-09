@@ -83,7 +83,7 @@ export default function WorkspaceDetail() {
                           <ArrowLeft className="h-4 w-4" />
                         </Button>
                         <div className="min-w-0">
-                          <h2 className="text-xl md:text-2xl font-bold tracking-tight break-words text-foreground">
+                          <h2 className="text-xl md:text-2xl font-bold tracking-tight wrap-break-word text-foreground">
                             {workspace.title}
                           </h2>
                           <p className="text-sm md:text-base text-muted-foreground">

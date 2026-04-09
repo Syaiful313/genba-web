@@ -67,7 +67,7 @@ export function WorkspaceList() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           <div className="min-w-0">
-            <h2 className="text-xl md:text-2xl font-bold tracking-tight break-words text-foreground">
+            <h2 className="text-xl md:text-2xl font-bold tracking-tight wrap-break-word text-foreground">
               Daftar Workspace
             </h2>
             <p className="text-sm md:text-base text-muted-foreground">
