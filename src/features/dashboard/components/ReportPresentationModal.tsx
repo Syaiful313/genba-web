@@ -1,29 +1,25 @@
-/**
- * /Users/syaiful/Documents/freelance/genba/genba-web/src/features/dashboard/components/ReportPresentationModal.tsx
- * Versi Ultra-Professional (Fixed Full-Width for Desktop)
- */
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogTitle,
   DialogDescription,
+  DialogTitle,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { Report } from "@/types/report";
 import {
+  AlertCircle,
+  Briefcase,
   ChevronLeft,
   ChevronRight,
-  X,
-  User,
-  Briefcase,
-  AlertCircle,
   LayoutGrid,
   List,
+  User,
+  X,
 } from "lucide-react";
-import { Report } from "@/types/report";
-import { cn } from "@/lib/utils";
+import { useCallback, useEffect, useState } from "react";
 
 export function ReportPresentationModal({
   reports,
@@ -143,7 +139,7 @@ export function ReportPresentationModal({
         {/* MAIN STAGE */}
         <div className="relative z-10 flex-1 flex flex-col md:flex-row min-h-0 overflow-hidden select-none">
           {/* IMAGE AREA - Large Center */}
-          <div className="flex-1 relative flex items-center justify-center p-4 md:p-12 lg:p-20 overflow-hidden">
+          <div className="flex-1 relative flex items-center justify-center p-2 pb-28 md:p-6 md:pb-32 lg:p-10 lg:pb-36 overflow-hidden">
             {/* Dynamic Background Glow */}
             <div className="absolute inset-0 z-0 flex items-center justify-center opacity-20 pointer-events-none blur-[120px]">
               <div className="w-[60vw] h-[60vh] bg-blue-600/30 rounded-full animate-pulse" />
@@ -164,14 +160,14 @@ export function ReportPresentationModal({
 
             <div className="relative z-10 w-full h-full flex items-center justify-center p-2 group">
               {currentReport.photoUrl ? (
-                <div className="relative max-h-full">
+                <div className="relative w-full h-full flex items-center justify-center group/img">
                   <img
                     src={currentReport.photoUrl}
-                    className="max-h-[60vh] md:max-h-[70vh] lg:max-h-[75vh] w-auto object-contain rounded-2xl shadow-[0_0_100px_rgba(0,0,0,0.8)] border border-white/5 select-none"
+                    className="max-w-full max-h-full object-contain rounded-2xl shadow-[0_0_100px_rgba(0,0,0,0.8)] border border-white/5 select-none"
                     alt={currentReport.title}
                   />
-                  <div className="absolute -top-1 -left-1 w-6 h-6 border-l-2 border-t-2 border-blue-500 rounded-tl-xl opacity-50" />
-                  <div className="absolute -bottom-1 -right-1 w-6 h-6 border-r-2 border-b-2 border-blue-500 rounded-br-xl opacity-50" />
+                  <div className="absolute top-0 left-0 w-6 h-6 border-l-2 border-t-2 border-blue-500 rounded-tl-xl opacity-50 transition-all duration-300 group-hover/img:-translate-x-2 group-hover/img:-translate-y-2" />
+                  <div className="absolute bottom-0 right-0 w-6 h-6 border-r-2 border-b-2 border-blue-500 rounded-br-xl opacity-50 transition-all duration-300 group-hover/img:translate-x-2 group-hover/img:translate-y-2" />
                 </div>
               ) : (
                 <div className="w-56 h-56 md:w-64 md:h-64 rounded-[3rem] bg-white/1 border border-white/5 flex flex-col items-center justify-center text-white/5 space-y-4">
@@ -197,56 +193,56 @@ export function ReportPresentationModal({
           </div>
 
           {/* BOTTOM FLOATING CONTROL PANEL - Glassmorphism */}
-          <div className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 w-[92vw] lg:w-[85vw] max-w-7xl z-30 pointer-events-none">
-            <div className="bg-[#0f0f0f]/70 backdrop-blur-3xl border border-white/10 rounded-[2.5rem] p-6 md:p-8 lg:p-10 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] flex flex-col md:flex-row gap-6 lg:gap-16 items-start md:items-center pointer-events-auto transition-all duration-500 hover:bg-[#0f0f0f]/90">
+          <div className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 w-[92vw] lg:w-[85vw] max-w-6xl z-30 pointer-events-none">
+            <div className="bg-[#0f0f0f]/70 backdrop-blur-3xl border border-white/10 rounded-3xl p-4 md:p-5 lg:p-6 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] flex flex-col md:flex-row gap-4 lg:gap-8 items-start md:items-center pointer-events-auto transition-all duration-500 hover:bg-[#0f0f0f]/90">
               {/* Left: Heading & Context */}
-              <div className="flex-1 min-w-0 space-y-3">
-                <div className="flex items-center gap-3">
-                  <span className="relative flex h-2 w-2">
+              <div className="flex-1 min-w-0 space-y-1.5">
+                <div className="flex items-center gap-2">
+                  <span className="relative flex h-1.5 w-1.5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-500"></span>
                   </span>
-                  <span className="text-blue-500 text-[10px] font-bold tracking-[0.3em] uppercase">
+                  <span className="text-blue-500 text-[9px] font-bold tracking-[0.2em] uppercase">
                     Observation Findings
                   </span>
                 </div>
-                <h2 className="text-xl md:text-3xl lg:text-4xl font-extrabold text-white tracking-tight uppercase leading-none truncate md:line-clamp-1">
+                <h2 className="text-lg md:text-xl lg:text-2xl font-extrabold text-white tracking-tight uppercase leading-none truncate md:line-clamp-1">
                   {currentReport.title}
                 </h2>
-                <p className="text-white/50 text-xs md:text-sm leading-relaxed line-clamp-2 md:line-clamp-3 font-medium">
+                <p className="text-white/50 text-xs leading-relaxed line-clamp-1 font-medium">
                   {currentReport.description ||
                     "No additional metadata recorded for this entry."}
                 </p>
               </div>
 
               {/* Right: Technical Metadata */}
-              <div className="shrink-0 flex items-center gap-6 lg:gap-12 pl-0 md:pl-10 lg:pl-16 border-t md:border-t-0 md:border-l border-white/5 w-full md:w-auto pt-6 md:pt-0">
-                <div className="flex items-center gap-4 group">
-                  <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-2xl bg-white/3 border border-white/5 flex items-center justify-center text-white/20 group-hover:text-blue-400 group-hover:bg-blue-400/10 transition-all duration-300">
-                    <Briefcase className="w-4 h-4 lg:w-5 lg:h-5" />
+              <div className="shrink-0 flex items-center gap-4 lg:gap-8 pl-0 md:pl-6 lg:pl-10 border-t md:border-t-0 md:border-l border-white/5 w-full md:w-auto pt-4 md:pt-0">
+                <div className="flex items-center gap-3 group">
+                  <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-xl bg-white/3 border border-white/5 flex items-center justify-center text-white/20 group-hover:text-blue-400 group-hover:bg-blue-400/10 transition-all duration-300">
+                    <Briefcase className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
                   </div>
                   <div className="flex flex-col min-w-0">
-                    <span className="text-[9px] lg:text-[10px] font-bold text-white/30 uppercase tracking-widest">
+                    <span className="text-[8px] lg:text-[9px] font-bold text-white/30 uppercase tracking-wider">
                       PIC Area
                     </span>
-                    <span className="text-sm lg:text-base text-white/90 font-bold tracking-tight truncate max-w-[120px]">
+                    <span className="text-xs lg:text-sm text-white/90 font-bold tracking-tight truncate max-w-[100px]">
                       {currentReport.pic}
                     </span>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 group">
-                  <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-2xl bg-white/3 border border-white/5 flex items-center justify-center text-white/20 group-hover:text-blue-400 group-hover:bg-blue-400/10 transition-all duration-300">
-                    <User className="w-4 h-4 lg:w-5 lg:h-5" />
+                <div className="flex items-center gap-3 group">
+                  <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-xl bg-white/3 border border-white/5 flex items-center justify-center text-white/20 group-hover:text-blue-400 group-hover:bg-blue-400/10 transition-all duration-300">
+                    <User className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
                   </div>
                   <div className="flex flex-col min-w-0">
-                    <span className="text-[9px] lg:text-[10px] font-bold text-white/30 uppercase tracking-widest">
+                    <span className="text-[8px] lg:text-[9px] font-bold text-white/30 uppercase tracking-wider">
                       Recorded By
                     </span>
-                    <span className="text-sm lg:text-base text-white/90 font-bold tracking-tight truncate max-w-[120px]">
+                    <span className="text-xs lg:text-sm text-white/90 font-bold tracking-tight truncate max-w-[100px]">
                       {currentReport.reporter?.firstName}
                     </span>
-                    <span className="text-[9px] lg:text-[10px] text-white/30 font-medium whitespace-nowrap">
+                    <span className="text-[8px] text-white/30 font-medium whitespace-nowrap">
                       {new Date(currentReport.createdAt).toLocaleDateString(
                         "id-ID",
                         { month: "short", day: "numeric" },
