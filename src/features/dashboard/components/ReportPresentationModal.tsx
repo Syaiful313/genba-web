@@ -12,8 +12,6 @@ import { Report } from "@/types/report";
 import {
   AlertCircle,
   Briefcase,
-  ChevronLeft,
-  ChevronRight,
   LayoutGrid,
   List,
   User,
@@ -145,19 +143,6 @@ export function ReportPresentationModal({
               <div className="w-[60vw] h-[60vh] bg-blue-600/30 rounded-full animate-pulse" />
             </div>
 
-            {/* Navigation Buttons */}
-            <button
-              onClick={prev}
-              className="absolute left-4 md:left-10 z-20 group p-4 text-white/10 hover:text-white transition-all transform hover:-translate-x-2"
-            >
-              <div className="relative flex flex-col items-center">
-                <ChevronLeft className="h-10 w-10 md:h-16 md:w-16 stroke-[1.5]" />
-                <span className="absolute -bottom-6 text-[10px] font-bold opacity-0 group-hover:opacity-100 uppercase tracking-widest transition-opacity">
-                  PREV
-                </span>
-              </div>
-            </button>
-
             <div className="relative z-10 w-full h-full flex items-center justify-center p-2 group">
               {currentReport.photoUrl ? (
                 <div className="relative w-full h-full flex items-center justify-center group/img">
@@ -178,18 +163,6 @@ export function ReportPresentationModal({
                 </div>
               )}
             </div>
-
-            <button
-              onClick={next}
-              className="absolute right-4 md:right-10 z-20 group p-4 text-white/10 hover:text-white transition-all transform hover:translate-x-2"
-            >
-              <div className="relative flex flex-col items-center">
-                <ChevronRight className="h-10 w-10 md:h-16 md:w-16 stroke-[1.5]" />
-                <span className="absolute -bottom-6 text-[10px] font-bold opacity-0 group-hover:opacity-100 uppercase tracking-widest transition-opacity">
-                  NEXT
-                </span>
-              </div>
-            </button>
           </div>
 
           {/* BOTTOM FLOATING CONTROL PANEL - Glassmorphism */}
