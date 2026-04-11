@@ -18,8 +18,15 @@ import {
   Briefcase,
   FileText,
   Clock,
+  Pencil,
+  Check,
+  X,
+  Loader2,
 } from "lucide-react";
 import Image from "next/image";
+import { useState, useEffect } from "react";
+import useUpdateReport from "@/hooks/api/report/useUpdateReport";
+import { toast } from "sonner";
 
 interface ReportDetailModalProps {
   report: Report | null;
@@ -32,7 +39,27 @@ export const ReportDetailModal = ({
   isOpen,
   onClose,
 }: ReportDetailModalProps) => {
+  const [isEditingPic, setIsEditingPic] = useState(false);
+  const [tempPic, setTempPic] = useState("");
+  const updateReport = useUpdateReport(report?.id || "");
+
+  useEffect(() => {
+    if (!isOpen) {
+      setIsEditingPic(false);
+    }
+  }, [isOpen]);
+
   if (!report) return null;
+
+  const handleUpdatePic = async () => {
+    try {
+      await updateReport.mutateAsync({ pic: tempPic });
+      toast.success("PIC berhasil diperbarui");
+      setIsEditingPic(false);
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || "Gagal memperbarui PIC");
+    }
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -112,13 +139,58 @@ export const ReportDetailModal = ({
                 <div className="p-3 rounded-2xl bg-muted/50 text-primary border border-transparent transition-all group-hover:bg-primary/10 group-hover:border-primary/20">
                   <Briefcase className="h-4 w-4" />
                 </div>
-                <div className="flex flex-col">
+                <div className="flex-1 flex flex-col min-w-0">
                   <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest opacity-60">
                     Penanggung Jawab
                   </span>
-                  <span className="text-sm font-black">
-                    {report.pic || "Belum ditentukan"}
-                  </span>
+                  {isEditingPic ? (
+                    <div className="flex items-center gap-2 mt-1">
+                      <input
+                        type="text"
+                        value={tempPic}
+                        onChange={(e) => setTempPic(e.target.value)}
+                        className="flex-1 bg-muted/50 border border-primary/20 rounded-lg px-2 py-1 text-sm font-black focus:outline-none focus:ring-1 focus:ring-primary/30"
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") handleUpdatePic();
+                          if (e.key === "Escape") setIsEditingPic(false);
+                        }}
+                        autoFocus
+                      />
+                      <button
+                        onClick={handleUpdatePic}
+                        disabled={updateReport.isPending}
+                        className="p-1 px-2 rounded-lg bg-primary text-white hover:opacity-90 disabled:opacity-50"
+                      >
+                        {updateReport.isPending ? (
+                          <Loader2 className="h-3 w-3 animate-spin" />
+                        ) : (
+                          <Check className="h-3 w-3" />
+                        )}
+                      </button>
+                      <button
+                        onClick={() => setIsEditingPic(false)}
+                        disabled={updateReport.isPending}
+                        className="p-1 px-2 rounded-lg bg-muted-foreground/10 text-muted-foreground hover:bg-muted-foreground/20"
+                      >
+                        <X className="h-3 w-3" />
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-2 mt-0.5">
+                      <span className="text-sm font-black truncate">
+                        {report.pic || "Belum ditentukan"}
+                      </span>
+                      <button
+                        onClick={() => {
+                          setTempPic(report.pic || "");
+                          setIsEditingPic(true);
+                        }}
+                        className="p-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity hover:bg-muted-foreground/10"
+                      >
+                        <Pencil className="h-3 w-3 text-muted-foreground" />
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
 

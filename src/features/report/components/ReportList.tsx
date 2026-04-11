@@ -35,6 +35,11 @@ export const ReportList = () => {
   const reports = data?.data || [];
   const meta = data?.meta;
 
+  // Sync selectedReport with the latest data from reports list if it's open
+  const currentReport = selectedReport 
+    ? reports.find(r => r.id === selectedReport.id) || selectedReport 
+    : null;
+
   const handleOpenDetail = (report: Report) => {
     setSelectedReport(report);
     setIsModalOpen(true);
@@ -214,7 +219,7 @@ export const ReportList = () => {
       <ReportDetailModal 
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        report={selectedReport}
+        report={currentReport}
       />
     </div>
   );
