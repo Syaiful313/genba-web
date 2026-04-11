@@ -2,9 +2,9 @@
 
 import { AppSidebar } from "@/components/AppSidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { SiteHeader } from "@/features/dashboard/components/SiteHeader";
-import { CreateReportModal } from "../dashboard/components/CreateReportModal";
+import { ReportSiteHeader } from "./components/ReportSiteHeader";
 import { ReportList } from "./components/ReportList";
+import { CreateReportModal } from "../dashboard/components/CreateReportModal";
 
 export default function ReportPage() {
   return (
@@ -12,7 +12,7 @@ export default function ReportPage() {
       <AppSidebar variant="inset" />
       <SidebarInset>
         <div className="flex min-h-screen flex-col bg-muted/20">
-          <SiteHeader />
+          <ReportSiteHeader />
 
           <main className="flex-1">
             <div className="@container/main flex flex-1 flex-col gap-2">
