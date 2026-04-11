@@ -163,6 +163,7 @@ export function CreateReportModal({
                 type="file"
                 className="hidden"
                 accept="image/*"
+                capture="environment"
                 onChange={handleFileChange}
                 ref={fileInputRef}
                 disabled={isCreating}
@@ -196,7 +197,7 @@ export function CreateReportModal({
                   <div className="flex flex-col items-center gap-2 text-muted-foreground group-hover:text-primary transition-colors">
                     <Camera className="size-8" />
                     <span className="text-sm font-medium">
-                      Klik untuk upload foto
+                      Klik untuk ambil foto
                     </span>
                   </div>
                 </button>

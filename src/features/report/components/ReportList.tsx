@@ -118,6 +118,7 @@ export const ReportList = () => {
                         src={report.photoUrl}
                         alt={report.title}
                         fill
+                        sizes="64px"
                         className="object-cover transition-transform duration-300 group-hover:scale-110"
                       />
                     ) : (

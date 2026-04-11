@@ -52,6 +52,7 @@ export const ReportDetailModal = ({
               src={report.photoUrl}
               alt={report.title}
               fill
+              sizes="(max-width: 768px) 100vw, 60vw"
               className="object-contain"
               priority
             />
