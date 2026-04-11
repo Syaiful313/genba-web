@@ -7,9 +7,9 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 export interface CreateReportPayload {
   title: string;
   description?: string;
-  workspaceId: string;
+  workspaceId?: string;
   photo?: File;
-  pic: string;
+  pic?: string;
 }
 
 const useCreateReport = () => {
@@ -20,8 +20,14 @@ const useCreateReport = () => {
     mutationFn: async (payload: CreateReportPayload) => {
       const formData = new FormData();
       formData.append("title", payload.title);
-      formData.append("workspaceId", payload.workspaceId);
-      formData.append("pic", payload.pic);
+      
+      if (payload.workspaceId) {
+        formData.append("workspaceId", payload.workspaceId);
+      }
+
+      if (payload.pic) {
+        formData.append("pic", payload.pic);
+      }
       
       if (payload.description) {
         formData.append("description", payload.description);

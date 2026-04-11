@@ -10,7 +10,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Field, FieldContent, FieldError, FieldLabel } from "@/components/ui/field";
+import {
+  Field,
+  FieldContent,
+  FieldError,
+  FieldLabel,
+} from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import useCreateReport from "@/hooks/api/report/useCreateReport";
 import { useFormik } from "formik";
@@ -20,7 +25,7 @@ import { toast } from "sonner";
 import * as Yup from "yup";
 
 interface CreateReportModalProps {
-  workspaceId: string;
+  workspaceId?: string;
   onSuccess?: () => void;
 }
 
@@ -29,13 +34,13 @@ const createReportSchema = Yup.object().shape({
     .required("Judul temuan wajib diisi")
     .min(3, "Minimal 3 karakter"),
   description: Yup.string().optional(),
-  workspaceId: Yup.string().required(),
+  workspaceId: Yup.string().optional(),
   photo: Yup.mixed().optional(),
-  pic: Yup.string().required("PIC wajib diisi"),
+  pic: Yup.string().optional(),
 });
 
 export function CreateReportModal({
-  workspaceId,
+  workspaceId = "",
   onSuccess,
 }: CreateReportModalProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -59,9 +64,9 @@ export function CreateReportModal({
         {
           title: values.title,
           description: values.description,
-          workspaceId: values.workspaceId,
+          workspaceId: values.workspaceId || undefined,
           photo: values.photo || undefined,
-          pic: values.pic,
+          pic: values.pic || undefined,
         },
         {
           onSuccess: () => {
@@ -116,7 +121,10 @@ export function CreateReportModal({
             Berikan detail temuan atau laporan untuk workspace ini.
           </DialogDescription>
         </DialogHeader>
-        <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4 py-4">
+        <form
+          onSubmit={formik.handleSubmit}
+          className="flex flex-col gap-4 py-4"
+        >
           <Field>
             <FieldLabel htmlFor="title">Judul Laporan</FieldLabel>
             <FieldContent>
@@ -147,20 +155,6 @@ export function CreateReportModal({
             </FieldContent>
           </Field>
 
-          <Field>
-            <FieldLabel htmlFor="pic">PIC (Person In Charge)</FieldLabel>
-            <FieldContent>
-              <Input
-                id="pic"
-                placeholder="Nama penanggung jawab"
-                {...formik.getFieldProps("pic")}
-                disabled={isCreating}
-              />
-              {formik.touched.pic && formik.errors.pic && (
-                <FieldError>{formik.errors.pic}</FieldError>
-              )}
-            </FieldContent>
-          </Field>
 
           <Field>
             <FieldLabel>Foto Temuan</FieldLabel>
@@ -223,7 +217,11 @@ export function CreateReportModal({
             >
               Batal
             </Button>
-            <Button type="submit" disabled={isCreating} className="cursor-pointer">
+            <Button
+              type="submit"
+              disabled={isCreating}
+              className="cursor-pointer"
+            >
               {isCreating ? (
                 <>
                   <Loader2 className="h-4 w-4 mr-2 animate-spin" />

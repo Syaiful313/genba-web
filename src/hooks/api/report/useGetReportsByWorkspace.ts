@@ -21,7 +21,6 @@ const useGetReportsByWorkspace = (queries?: GetReportsQueries) => {
       );
       return data;
     },
-    enabled: !!queries?.workspaceId, // Only fetch if we have a workspaceId
   });
 };
 

@@ -14,6 +14,7 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   CommandIcon,
+  FileText,
   LayoutDashboardIcon,
   LogOutIcon,
   UserIcon,
@@ -25,8 +26,13 @@ const data = {
   navMain: [
     {
       title: "Dashboard",
-      url: "#",
+      url: "/dashboard",
       icon: <LayoutDashboardIcon />,
+    },
+    {
+      title: "Laporan",
+      url: "/dashboard/reports",
+      icon: <FileText />,
     },
   ],
 };
